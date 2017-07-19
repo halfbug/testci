@@ -53,8 +53,26 @@
  *
  * NOTE: If you change these, also change the error_reporting() code below
  */
-	define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : 'development');
+	//define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : 'development');
 
+$http_host = isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : '';
+//print_r($_SERVER);
+if ($http_host == 'localhost')
+{
+    define('ENVIRONMENT', 'development');
+}
+elseif($http_host == 'staging.citest.com')
+{
+    define('ENVIRONMENT', 'testing');
+}
+elseif($http_host == 'citest.com')
+{
+    define('ENVIRONMENT', 'production');
+}
+else
+{
+    define('ENVIRONMENT', 'development');
+}
 /*
  *---------------------------------------------------------------
  * ERROR REPORTING
